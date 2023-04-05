@@ -1,0 +1,20 @@
+Static Analysis Report:
+
+For this assignment, implement a move validation engine for the game of chess, use a static analysis tool to help identify potential defects before starting testing, develop test cases for the program, and collect code coverage data to help determine the adequacy of the testing effort.
+
+The goal of this assignment is to give an opportunity to work with tools that help us become more effective in uncovering software defects. The purpose of the program will develop be to compute all legal moves for a piece on a given chessboard configuration.
+
+I used the SonarLint static analysis tool in IntelliJ to analyze the given code and it reported several issues. Some of the main issues reported by the tool were:
+
+    High Cognitive Complexity: several methods, such as computeKingMoves, computeRookMoves, and computeBishopMoves had a high Cognitive Complexity score of more than 15, which indicates that these methods are complex and difficult to understand.
+	To address these issues, I made the following improvements: For methods with high Cognitive Complexity, such as computeKingMoves, computeRookMoves, and computeBishopMoves, I refactored the code to reduce the complexity and improve readability. I used named constants instead of magic numbers and simplified the code where possible.
+
+
+    Magic Numbers: several methods, such as computeKingMoves, used magic numbers for file and rank indices, which makes the code hard to read and maintain.
+	To address the issue of magic numbers, I replaced the magic numbers in the computeKingMoves method with named constants.
+
+
+    Low Code Coverage: The code coverage was low, which means that not all code paths were tested. The static analysis tool has detected low branch coverage in the computePawnMoves method, which could indicate potential bugs or untested code paths.
+	To address this issue, I added additional tests to cover the missing code paths. I also replaced magic numbers with named constants to make the code more readable.
+
+After making these improvements, the code now has a higher code coverage and is easier to read and maintain. The SonarLint tool shows that the overall code quality has improved significantly.

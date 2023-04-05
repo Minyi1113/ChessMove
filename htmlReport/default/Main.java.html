@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ChessGameTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">
+import java.util.*;
+import java.util.logging.Logger;
+
+
+
+
+<span class="nc" id="L8">public class Main {</span>
+
+<span class="fc" id="L10">    private static final Logger logger = Logger.getLogger(Main.class.getName());</span>
+    public static final int BOARD_SIZE = 8;
+
+    public static void main(String[] args) {
+<span class="fc" id="L14">        Scanner scanner = new Scanner(System.in);</span>
+
+        // Reading the input board configuration
+<span class="fc" id="L17">        System.out.println(&quot;Enter board configuration:&quot;);</span>
+<span class="fc" id="L18">        System.out.print(&quot;WHITE: &quot;);</span>
+<span class="fc" id="L19">        String white = scanner.nextLine();</span>
+<span class="fc" id="L20">        System.out.print(&quot;BLACK: &quot;);</span>
+<span class="fc" id="L21">        String black = scanner.nextLine();</span>
+<span class="fc" id="L22">        System.out.print(&quot;PIECE TO MOVE: &quot;);</span>
+<span class="fc" id="L23">        String piece = scanner.nextLine();</span>
+
+<span class="fc" id="L25">        String LegalMoves = &quot;LEGAL MOVES FOR &quot;;</span>
+<span class="fc" id="L26">        boolean isExit=false;</span>
+        // Calling the computeLegalMoves function based on the piece type
+<span class="fc" id="L28">        List&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L29" title="All 7 branches covered.">        switch (piece.charAt(0)) {</span>
+            case 'K':
+<span class="fc" id="L31">                moves = computeKingMoves(white, black, piece);</span>
+<span class="fc" id="L32">                break;</span>
+            case 'R':
+<span class="fc" id="L34">                moves = computeRookMoves(white, black, piece.substring(1));</span>
+<span class="fc" id="L35">                break;</span>
+            case 'B':
+<span class="fc" id="L37">                moves = computeBishopMoves(white, black, piece.substring(1));</span>
+<span class="fc" id="L38">                break;</span>
+            case 'N':
+<span class="fc" id="L40">                moves = computeKnightMoves(white, black, piece.substring(1));</span>
+<span class="fc" id="L41">                break;</span>
+            case 'Q':
+<span class="fc" id="L43">                moves = computeQueenMoves(white, black, piece.substring(1));</span>
+<span class="fc" id="L44">                break;</span>
+            case 'P':
+<span class="fc" id="L46">                moves = computePawnMoves(white, black, piece.substring(1));</span>
+<span class="fc" id="L47">                break;</span>
+            default:
+<span class="fc" id="L49">                System.out.println(&quot;Invalid piece. Please try again.&quot;);</span>
+<span class="fc" id="L50">                isExit=true;</span>
+
+        }
+
+        // Print the legal moves for the piece
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (!isExit) {</span>
+<span class="fc" id="L56">            System.out.print(LegalMoves + piece + &quot;: &quot; + moves);}</span>
+<span class="fc" id="L57">    }</span>
+
+    //Function to compute legal moves for a King
+    public static List&lt;String&gt; computeKingMoves(String white, String black, String piece) {
+<span class="fc" id="L61">        List&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+
+        // Parse the board configuration strings
+<span class="fc" id="L64">        Set&lt;String&gt; whiteSet = parseBoardConfig(white);</span>
+<span class="fc" id="L65">        Set&lt;String&gt; blackSet = parseBoardConfig(black);</span>
+<span class="fc" id="L66">        String[] pieces = piece.split(&quot;&quot;);</span>
+<span class="fc" id="L67">        String piecePos = pieces[1] + pieces[2];</span>
+
+        // Compute all possible king moves
+<span class="fc" id="L70">        int file = piecePos.charAt(0) - 'a';</span>
+<span class="fc" id="L71">        int rank = piecePos.charAt(1) - '1';</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (int dx = -1; dx &lt;= 1; dx++) {</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            for (int dy = -1; dy &lt;= 1; dy++) {</span>
+<span class="fc bfc" id="L74" title="All 4 branches covered.">                if (dx != 0 || dy != 0) {</span>
+<span class="fc" id="L75">                    int newFile = file + dx;</span>
+<span class="fc" id="L76">                    int newRank = rank + dy;</span>
+<span class="pc bpc" id="L77" title="3 of 8 branches missed.">                    if (newFile &gt;= 0 &amp;&amp; newFile &lt; BOARD_SIZE &amp;&amp; newRank &gt;= 0 &amp;&amp; newRank &lt; BOARD_SIZE) {</span>
+<span class="fc" id="L78">                        String newPos = &quot;&quot; + (char) (newFile + 'a') + (char) (newRank + '1');</span>
+<span class="pc bpc" id="L79" title="1 of 4 branches missed.">                        if (!whiteSet.contains(newPos) &amp;&amp; !blackSet.contains(newPos)) {</span>
+<span class="fc" id="L80">                            moves.add(newPos);</span>
+                        }
+                    }
+                }
+            }
+        }
+
+<span class="fc" id="L87">        return moves;</span>
+    }
+
+    private static Set&lt;String&gt; parseBoardConfig(String config) {
+<span class="fc" id="L91">        Set&lt;String&gt; set = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L92">        String[] pieces = config.split(&quot;, &quot;);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (String piece : pieces) {</span>
+<span class="fc" id="L94">            String[] parts = piece.split(&quot;&quot;);</span>
+<span class="fc" id="L95">            String pos = parts[1] + parts[2];</span>
+<span class="fc" id="L96">            set.add(pos);</span>
+        }
+<span class="fc" id="L98">        return set;</span>
+    }
+
+
+
+    public static List&lt;String&gt; computeRookMoves(String white, String black, String piece) {
+<span class="fc" id="L104">        int row = 8 - Character.getNumericValue(piece.charAt(1));</span>
+<span class="fc" id="L105">        int col = piece.charAt(0) - 'a';</span>
+
+<span class="fc" id="L107">        List&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L109">        moves.addAll(checkStraightMoves(white, black, row, col, -1, 0)); // up</span>
+<span class="fc" id="L110">        moves.addAll(checkStraightMoves(white, black, row, col, 1, 0)); // down</span>
+<span class="fc" id="L111">        moves.addAll(checkStraightMoves(white, black, row, col, 0, -1)); // left</span>
+<span class="fc" id="L112">        moves.addAll(checkStraightMoves(white, black, row, col, 0, 1)); // right</span>
+
+<span class="fc" id="L114">        return moves;</span>
+    }
+
+    static List&lt;String&gt; checkStraightMoves(String white, String black, int row, int col, int rowDirection, int colDirection) {
+<span class="fc" id="L118">        List&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L120">        int curRow = row + rowDirection;</span>
+<span class="fc" id="L121">        int curCol = col + colDirection;</span>
+
+<span class="pc bpc" id="L123" title="2 of 8 branches missed.">        while (curRow &gt;= 0 &amp;&amp; curRow &lt; 8 &amp;&amp; curCol &gt;= 0 &amp;&amp; curCol &lt; 8) {</span>
+<span class="fc" id="L124">            String target = (char)('a' + curCol) + Integer.toString(8 - curRow);</span>
+<span class="fc bfc" id="L125" title="All 4 branches covered.">            if (white.contains(target) || black.contains(target)) {</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                if (black.contains(target)) {</span>
+<span class="fc" id="L127">                    moves.add(target);</span>
+                }
+                break;
+            } else {
+<span class="fc" id="L131">                moves.add(target);</span>
+            }
+
+<span class="fc" id="L134">            curRow += rowDirection;</span>
+<span class="fc" id="L135">            curCol += colDirection;</span>
+<span class="fc" id="L136">        }</span>
+
+<span class="fc" id="L138">        return moves;</span>
+    }
+
+
+    public static List&lt;String&gt; computeBishopMoves(String white, String black, String piece) {
+<span class="fc" id="L143">        ArrayList&lt;String&gt; legalMoves = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L144">        int file = piece.charAt(0) - 'a'; // convert file to integer (0-7)</span>
+<span class="fc" id="L145">        int rank = 8 - (piece.charAt(1) - '0'); // convert rank to integer (0-7)</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">        char color = Character.isUpperCase(piece.charAt(0)) ? 'W' : 'B'; // determine color of piece</span>
+
+        // check diagonal moves in each direction
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        for (int i = -1; i &lt;= 1; i += 2) {</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">            for (int j = -1; j &lt;= 1; j += 2) {</span>
+<span class="fc" id="L151">                int x = file + i;</span>
+<span class="fc" id="L152">                int y = rank + j;</span>
+<span class="pc bpc" id="L153" title="1 of 8 branches missed.">                while (x &gt;= 0 &amp;&amp; x &lt; 8 &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; 8) { // while on board</span>
+<span class="fc" id="L154">                    String square = &quot;&quot; + (char)('a' + x) + (char)('0' + (8 - y));</span>
+<span class="fc" id="L155">                    String occupant = getOccupant(square, white, black);</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">                    if (occupant == null) { // empty square</span>
+<span class="fc" id="L157">                        legalMoves.add(square);</span>
+
+                    } else { // own piece blocks path
+                        break; // cannot move past own piece
+                    }
+<span class="fc" id="L162">                    x += i;</span>
+<span class="fc" id="L163">                    y += j;</span>
+<span class="fc" id="L164">                }</span>
+            }
+        }
+<span class="fc" id="L167">        return legalMoves;</span>
+    }
+
+    // helper method to get the occupant of a square
+    public static String getOccupant(String square, String white, String black) {
+<span class="fc" id="L172">        String occupant = null;</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        if (white.contains(square)) {</span>
+<span class="fc" id="L174">            occupant = white.substring(white.indexOf(square), white.indexOf(square) + 2);</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        } else if (black.contains(square)) {</span>
+<span class="fc" id="L176">            occupant = black.substring(black.indexOf(square), black.indexOf(square) + 2);</span>
+        }
+<span class="fc" id="L178">        return occupant;</span>
+    }
+
+    // helper method to get the color of a piece
+    public static char getColor(String piece) {
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        return Character.isUpperCase(piece.charAt(0)) ? 'W' : 'B';</span>
+    }
+
+
+
+    public static List&lt;String&gt; computeKnightMoves(String white, String black, String piece) {
+<span class="fc" id="L189">        ArrayList&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L190">        int x = piece.charAt(0) - 'a';</span>
+<span class="fc" id="L191">        int y = 8 - (piece.charAt(1) - '0');</span>
+<span class="fc" id="L192">        int[][] offsets = {{-2,-1}, {-2,1}, {-1,-2}, {-1,2}, {1,-2}, {1,2}, {2,-1}, {2,1}};</span>
+
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        for (int[] offset : offsets) {</span>
+<span class="fc" id="L195">            int nx = x + offset[0];</span>
+<span class="fc" id="L196">            int ny = y + offset[1];</span>
+<span class="pc bpc" id="L197" title="4 of 8 branches missed.">            if (nx &gt;= 0 &amp;&amp; nx &lt;= 7 &amp;&amp; ny &gt;= 0 &amp;&amp; ny &lt;= 7) {</span>
+<span class="fc" id="L198">                String dest = &quot;&quot; + (char)(nx + 'a') + (char)(8 - ny + '0');</span>
+<span class="fc bfc" id="L199" title="All 4 branches covered.">                if (!white.contains(dest) &amp;&amp; !black.contains(dest)) {</span>
+<span class="fc" id="L200">                    moves.add(dest);</span>
+                }
+            }
+        }
+
+<span class="fc" id="L205">        return moves;</span>
+    }
+
+
+
+    public static List&lt;String&gt; computeQueenMoves(String white, String black, String piece) {
+<span class="fc" id="L211">        ArrayList&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L212">        moves.addAll(computeRookMoves(white, black, piece));</span>
+<span class="fc" id="L213">        moves.addAll(computeBishopMoves(white, black, piece));</span>
+<span class="fc" id="L214">        return moves;</span>
+    }
+
+
+
+    public static List&lt;String&gt; computePawnMoves(String white, String black, String piece) {
+<span class="fc" id="L220">        ArrayList&lt;String&gt; moves = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L221">        char file = piece.charAt(0);</span>
+<span class="fc" id="L222">        int rank = Character.getNumericValue(piece.charAt(1));</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        int direction = (white.contains(piece)) ? 1 : -1; // pawn direction depends on color</span>
+
+        // check for move one square forward
+<span class="fc" id="L226">        int nextRank = rank + direction;</span>
+<span class="fc" id="L227">        String nextSquare = String.format(&quot;%c%d&quot;, file, nextRank);</span>
+<span class="pc bpc" id="L228" title="2 of 4 branches missed.">        if (!white.contains(nextSquare) &amp;&amp; !black.contains(nextSquare)) {</span>
+<span class="fc" id="L229">            moves.add(nextSquare);</span>
+        }
+
+        // check for move two squares forward
+<span class="pc bpc" id="L233" title="1 of 8 branches missed.">        if ((direction == 1 &amp;&amp; rank == 2) || (direction == -1 &amp;&amp; rank == 7)) {</span>
+<span class="fc" id="L234">            int nextNextRank = nextRank + direction;</span>
+<span class="fc" id="L235">            String nextNextSquare = String.format(&quot;%c%d&quot;, file, nextNextRank);</span>
+<span class="pc bpc" id="L236" title="2 of 4 branches missed.">            if (!white.contains(nextNextSquare) &amp;&amp; !black.contains(nextNextSquare)) {</span>
+<span class="fc" id="L237">                moves.add(nextNextSquare);</span>
+            }
+        }
+
+        // check for capture moves
+<span class="fc" id="L242">        char leftFile = (char)(file - 1);</span>
+<span class="fc" id="L243">        char rightFile = (char)(file + 1);</span>
+
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        if (leftFile &gt;= 'a') {</span>
+<span class="fc" id="L246">            String leftSquare = String.format(&quot;%c%d&quot;, leftFile, nextRank);</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">            if (black.contains(leftSquare)) {</span>
+<span class="fc" id="L248">                moves.add(leftSquare);</span>
+            }
+        }
+
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">        if (rightFile &lt;= 'h') {</span>
+<span class="fc" id="L253">            String rightSquare = String.format(&quot;%c%d&quot;, rightFile, nextRank);</span>
+<span class="fc bfc" id="L254" title="All 2 branches covered.">            if (black.contains(rightSquare)) {</span>
+<span class="fc" id="L255">                moves.add(rightSquare);</span>
+            }
+        }
+
+<span class="fc" id="L259">        return moves;</span>
+    }
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

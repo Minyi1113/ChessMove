@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChessGameTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ChessGameTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">ChessGameTest.java</span></div><h1>ChessGameTest.java</h1><pre class="source lang-java linenums">
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
+
+<span class="fc" id="L18">public class ChessGameTest {</span>
+
+
+    @Test
+    public void testMainB() {
+        // Set up input for test
+<span class="fc" id="L24">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Rf1, Kg1, Pf2, Ph2, Pg3\r\n BLACK: Kb8, Ne8, Pa7, Pb7, Pc7, Ra5\r\nRf1\r\n&quot;.getBytes());</span>
+<span class="fc" id="L25">        System.setIn(in);</span>
+<span class="fc" id="L26">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L27">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L30">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L33">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: LEGAL MOVES FOR Rf1: [e1, d1, c1, b1, a1]&quot;;</span>
+<span class="fc" id="L34">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L35">    }</span>
+
+    @Test
+    public void testMainK() {
+        // Set up input for test
+<span class="fc" id="L40">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Rf1, Kg1, Pf2, Ph2, Pg3\r\n BLACK: Kb8, Ne8, Pa7, Pb7, Pc7, Ra5\r\nKg1\r\n&quot;.getBytes());</span>
+<span class="fc" id="L41">        System.setIn(in);</span>
+<span class="fc" id="L42">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L43">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L46">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L49">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: LEGAL MOVES FOR Kg1: [f1, g2, h1]&quot;;</span>
+<span class="fc" id="L50">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L51">    }</span>
+    @Test
+    public void testMainBishop() {
+        // Set up input for test
+<span class="fc" id="L55">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6\r\n BLACK: Kb8, Be8, Pa7, Pb7, Pc7, Ra5\r\nBf5\r\n&quot;.getBytes());</span>
+<span class="fc" id="L56">        System.setIn(in);</span>
+<span class="fc" id="L57">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L58">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L61">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L64">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: LEGAL MOVES FOR Bf5: [e6, d7, c8, e4, d3, c2, b1, g4, h3]&quot;;</span>
+<span class="fc" id="L65">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L66">    }</span>
+    @Test
+    public void testMainKnight() {
+        // Set up input for test
+<span class="fc" id="L70">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6\r\n BLACK: Kb8, Be8, Pa7, Pb7, Pc7, Ra5, Rb5, Nd4\r\nNd4\r\n&quot;.getBytes());</span>
+<span class="fc" id="L71">        System.setIn(in);</span>
+<span class="fc" id="L72">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L73">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L76">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L79">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: LEGAL MOVES FOR Nd4: [b3, c6, c2, e6, e2, f3]&quot;;</span>
+<span class="fc" id="L80">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L81">    }</span>
+
+    @Test
+    public void testMainQueen() {
+        // Set up input for test
+<span class="fc" id="L86">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6\r\n BLACK: Kb8, Be8, Pa7, Pb7, Pc7, Ra5\r\nQf3\r\n&quot;.getBytes());</span>
+<span class="fc" id="L87">        System.setIn(in);</span>
+<span class="fc" id="L88">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L89">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L92">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L95">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: LEGAL MOVES FOR Qf3: [f4, e3, d3, c3, b3, a3, e4, d5, c6, e2, d1, g4, h5, g2, h1]&quot;;</span>
+<span class="fc" id="L96">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L97">    }</span>
+
+    @Test
+    public void testMainPawn() {
+        // Set up input for test
+<span class="fc" id="L102">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6, Pd6\r\n BLACK: Kb8, Be8, Pa7, Pb7, Pc7, Ra5\r\nPd6\r\n&quot;.getBytes());</span>
+<span class="fc" id="L103">        System.setIn(in);</span>
+<span class="fc" id="L104">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L105">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L108">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L111">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: LEGAL MOVES FOR Pd6: [d7, c7]&quot;;</span>
+<span class="fc" id="L112">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L113">    }</span>
+
+    @Test
+    public void testMainDD() {
+        // Set up input for test
+<span class="fc" id="L118">        ByteArrayInputStream in = new ByteArrayInputStream(&quot;WHITE: Pd6\r\n BLACK: Ra5\r\nLd6\r\n&quot;.getBytes());</span>
+<span class="fc" id="L119">        System.setIn(in);</span>
+<span class="fc" id="L120">        ByteArrayOutputStream out = new ByteArrayOutputStream();</span>
+<span class="fc" id="L121">        System.setOut(new PrintStream(out));</span>
+
+        // Call function to test
+<span class="fc" id="L124">        Main.main(new String[0]);</span>
+
+        // Check output
+<span class="fc" id="L127">        String expectedOutput = &quot;Enter board configuration:\r\nWHITE: BLACK: PIECE TO MOVE: Invalid piece. Please try again.\r\n&quot;;</span>
+<span class="fc" id="L128">        assertEquals(expectedOutput, out.toString());</span>
+<span class="fc" id="L129">    }</span>
+
+
+    // Test case for computing legal moves for a king
+    @Test
+    public void testComputeKingMoves() {
+<span class="fc" id="L135">        String white = &quot;Rf1, Kg1, Pf2, Ph2, Pg3&quot;;</span>
+<span class="fc" id="L136">        String black = &quot;Kb8, Ne8, Pa7, Pb7, Pc7, Ra5&quot;;</span>
+<span class="fc" id="L137">        String piece = &quot;Kg1&quot;;</span>
+<span class="fc" id="L138">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;g2&quot;, &quot;h1&quot;);</span>
+<span class="fc" id="L139">        assertEquals(expectedMoves, Main.computeKingMoves(white, black, piece));</span>
+<span class="fc" id="L140">    }</span>
+
+    // Test case for computing legal moves for a rook
+    @Test
+    public void testComputeRookMoves() {
+<span class="fc" id="L145">        String white = &quot;Rf1, Kg1, Pf2, Ph2, Pg3&quot;;</span>
+<span class="fc" id="L146">        String black = &quot;Kb8, Ne8, Pa7, Pb7, Pc7, Ra5&quot;;</span>
+<span class="fc" id="L147">        String piece = &quot;Rf1&quot;;</span>
+<span class="fc" id="L148">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;e1&quot;, &quot;d1&quot;, &quot;c1&quot;, &quot;b1&quot;, &quot;a1&quot;);</span>
+<span class="fc" id="L149">        assertEquals(expectedMoves, Main.computeRookMoves(white, black, piece.substring(1)));</span>
+<span class="fc" id="L150">    }</span>
+
+    @Test
+    public void testCheckStraightMoves() {
+<span class="fc" id="L154">        String white = &quot;a1 b2 c3 d4 e5 f6 g7 h8&quot;;</span>
+<span class="fc" id="L155">        String black = &quot;a7 b6 c5 d4 e3 f2 g1&quot;;</span>
+<span class="fc" id="L156">        int row = 4;</span>
+<span class="fc" id="L157">        int col = 4;</span>
+<span class="fc" id="L158">        int rowDirection = 1;</span>
+<span class="fc" id="L159">        int colDirection = 0;</span>
+
+<span class="fc" id="L161">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;e3&quot;);</span>
+<span class="fc" id="L162">        List&lt;String&gt; actualMoves = Main.checkStraightMoves(white, black, row, col, rowDirection, colDirection);</span>
+
+<span class="fc" id="L164">        Assertions.assertEquals(expectedMoves, actualMoves);</span>
+<span class="fc" id="L165">    }</span>
+
+    // Test case for computing legal moves for a bishop
+    @Test
+    public void testComputeBishopMoves() {
+<span class="fc" id="L170">        String white = &quot;Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6&quot;;</span>
+<span class="fc" id="L171">        String black = &quot;Kb8, Be8, Pa7, Pb7, Pc7, Ra5&quot;;</span>
+<span class="fc" id="L172">        String piece = &quot;Bf5&quot;;</span>
+<span class="fc" id="L173">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;e6&quot;, &quot;d7&quot;, &quot;c8&quot;, &quot;e4&quot;, &quot;d3&quot;, &quot;c2&quot;, &quot;b1&quot;, &quot;g4&quot;, &quot;h3&quot;);</span>
+<span class="fc" id="L174">        assertEquals(expectedMoves, Main.computeBishopMoves(white, black, piece.substring(1)));</span>
+<span class="fc" id="L175">    }</span>
+
+
+
+
+    // Test case for computing legal moves for a knight
+    @Test
+    public void testComputeKnightMoves() {
+<span class="fc" id="L183">        String white = &quot;Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6&quot;;</span>
+<span class="fc" id="L184">        String black = &quot;Kb8, Be8, Pa7, Pb7, Pc7, Ra5, Rb5, Nd4&quot;;</span>
+<span class="fc" id="L185">        String piece = &quot;Nd4&quot;;</span>
+<span class="fc" id="L186">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;b3&quot;, &quot;c6&quot;, &quot;c2&quot;, &quot;e6&quot;, &quot;e2&quot;, &quot;f3&quot;);</span>
+<span class="fc" id="L187">        assertEquals(expectedMoves, Main.computeKnightMoves(white, black, piece.substring(1)));</span>
+<span class="fc" id="L188">    }</span>
+
+    // Test case for computing legal moves for a Queen
+    @Test
+    public void testcomputeQueenMoves() {
+<span class="fc" id="L193">        String white = &quot;Rf1, Kg1, Pf2, Ph2, Pg3, Bf5, Rg6&quot;;</span>
+<span class="fc" id="L194">        String black = &quot;Kb8, Be8, Pa7, Pb7, Pc7, Ra5&quot;;</span>
+<span class="fc" id="L195">        String piece = &quot;Qf3&quot;;</span>
+<span class="fc" id="L196">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;f4&quot;, &quot;e3&quot;, &quot;d3&quot;, &quot;c3&quot;, &quot;b3&quot;, &quot;a3&quot;, &quot;e4&quot;, &quot;d5&quot;, &quot;c6&quot;, &quot;e2&quot;, &quot;d1&quot;, &quot;g4&quot;, &quot;h5&quot;, &quot;g2&quot;, &quot;h1&quot;);</span>
+<span class="fc" id="L197">        assertEquals(expectedMoves, Main.computeQueenMoves(white, black, piece.substring(1)));</span>
+<span class="fc" id="L198">    }</span>
+
+    // Test case for computing legal moves for a Pawn
+    @Test
+    public void testComputePawnMovesWhite() {
+<span class="fc" id="L203">        String white = &quot;a2,b2,c2,d2,e2,f2,g2,h2&quot;;</span>
+<span class="fc" id="L204">        String black = &quot;a7,b7,c7,d7,e7,f7,g7,h7&quot;;</span>
+<span class="fc" id="L205">        String piece = &quot;d2&quot;;</span>
+<span class="fc" id="L206">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;d3&quot;, &quot;d4&quot;);</span>
+<span class="fc" id="L207">        List&lt;String&gt; actualMoves = Main.computePawnMoves(white, black, piece);</span>
+<span class="fc" id="L208">        assertEquals(expectedMoves, actualMoves);</span>
+<span class="fc" id="L209">    }</span>
+
+    @Test
+    public void testComputePawnMovesBlack() {
+<span class="fc" id="L213">        String white = &quot;a2,b2,c2,d2,e2,f2,g2,h2&quot;;</span>
+<span class="fc" id="L214">        String black = &quot;a7,b7,c7,d7,e7,f7,g7,h7&quot;;</span>
+<span class="fc" id="L215">        String piece = &quot;e7&quot;;</span>
+<span class="fc" id="L216">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;e6&quot;, &quot;e5&quot;);</span>
+<span class="fc" id="L217">        List&lt;String&gt; actualMoves = Main.computePawnMoves(white, black, piece);</span>
+<span class="fc" id="L218">        assertEquals(expectedMoves, actualMoves);</span>
+<span class="fc" id="L219">    }</span>
+
+    @Test
+    public void testComputePawnMovesNoMoves() {
+<span class="fc" id="L223">        String white = &quot;a2,b2,c2,d2,e2,f2,g2,h2&quot;;</span>
+<span class="fc" id="L224">        String black = &quot;a7,b7,c7,d7,e7,f7,g7,h7&quot;;</span>
+<span class="fc" id="L225">        String piece = &quot;a2&quot;;</span>
+<span class="fc" id="L226">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;a3&quot;, &quot;a4&quot;);</span>
+<span class="fc" id="L227">        List&lt;String&gt; actualMoves = Main.computePawnMoves(white, black, piece);</span>
+<span class="fc" id="L228">        assertEquals(expectedMoves, actualMoves);</span>
+<span class="fc" id="L229">    }</span>
+
+    @Test
+    public void testComputePawnMovesCapture() {
+<span class="fc" id="L233">        String white = &quot;a2,b2,c2,d2,e2,f2,g2,h2&quot;;</span>
+<span class="fc" id="L234">        String black = &quot;a7,b7,c7,d7,e7,f7,g7,h7&quot;;</span>
+<span class="fc" id="L235">        String piece = &quot;a7&quot;;</span>
+<span class="fc" id="L236">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;a6&quot;, &quot;a5&quot;);</span>
+<span class="fc" id="L237">        List&lt;String&gt; actualMoves = Main.computePawnMoves(white, black, piece);</span>
+<span class="fc" id="L238">        assertEquals(expectedMoves, actualMoves);</span>
+<span class="fc" id="L239">    }</span>
+
+
+    @Test
+    public void testComputePawnMoves() {
+<span class="fc" id="L244">        String white = &quot;a2 b2 c2 d2 e2 f2 g2 h2&quot;;</span>
+<span class="fc" id="L245">        String black = &quot;a7 b7 c7 d3 e7 f7 g7 h7&quot;;</span>
+<span class="fc" id="L246">        String piece = &quot;c2&quot;;</span>
+<span class="fc" id="L247">        List&lt;String&gt; expectedMoves = Arrays.asList(&quot;c3&quot;, &quot;c4&quot;, &quot;d3&quot;);</span>
+<span class="fc" id="L248">        List&lt;String&gt; actualMoves = Main.computePawnMoves(white, black, piece);</span>
+<span class="fc" id="L249">        assertEquals(expectedMoves, actualMoves);</span>
+<span class="fc" id="L250">    }</span>
+
+
+
+    // This test cases cover the following scenarios:
+    // The square is empty
+    @Test
+    public void testGetOccupantWhenSquareIsEmpty() {
+<span class="fc" id="L258">        String square = &quot;e3&quot;;</span>
+<span class="fc" id="L259">        String white = &quot;a2 b2 c2 d2 e2 f2 g2 h2&quot;;</span>
+<span class="fc" id="L260">        String black = &quot;a7 b7 c7 d7 e7 f7 g7 h7&quot;;</span>
+<span class="fc" id="L261">        String expectedOccupant = null;</span>
+<span class="fc" id="L262">        String actualOccupant = Main.getOccupant(square, white, black);</span>
+<span class="fc" id="L263">        assertEquals(expectedOccupant, actualOccupant);</span>
+<span class="fc" id="L264">    }</span>
+
+
+    // This test cases cover the following scenarios:
+    // The square contains a white piece
+    @Test
+    public void testGetOccupantWhenSquareContainsWhitePiece() {
+<span class="fc" id="L271">        String square = &quot;e2&quot;;</span>
+<span class="fc" id="L272">        String white = &quot;a2 b2 c2 d2 e2 f2 g2 h2&quot;;</span>
+<span class="fc" id="L273">        String black = &quot;a7 b7 c7 d7 e7 f7 g7 h7&quot;;</span>
+<span class="fc" id="L274">        String expectedOccupant = &quot;e2&quot;;</span>
+<span class="fc" id="L275">        String actualOccupant = Main.getOccupant(square, white, black);</span>
+<span class="fc" id="L276">        assertEquals(expectedOccupant, actualOccupant);</span>
+<span class="fc" id="L277">    }</span>
+
+    // This test cases cover the following scenarios:
+    // The square contains a black piece
+    @Test
+    public void testGetOccupantWhenSquareContainsBlackPiece() {
+<span class="fc" id="L283">        String square = &quot;e7&quot;;</span>
+<span class="fc" id="L284">        String white = &quot;a2 b2 c2 d2 e2 f2 g2 h2&quot;;</span>
+<span class="fc" id="L285">        String black = &quot;a7 b7 c7 d7 e7 f7 g7 h7&quot;;</span>
+<span class="fc" id="L286">        String expectedOccupant = &quot;e7&quot;;</span>
+<span class="fc" id="L287">        String actualOccupant = Main.getOccupant(square, white, black);</span>
+<span class="fc" id="L288">        assertEquals(expectedOccupant, actualOccupant);</span>
+<span class="fc" id="L289">    }</span>
+
+    // This test cases cover the following scenarios:
+    // The square contains both a white and a black piece
+    @Test
+    public void testGetOccupantWhenSquareContainsBothWhiteAndBlackPiece() {
+<span class="fc" id="L295">        String square = &quot;a2&quot;;</span>
+<span class="fc" id="L296">        String white = &quot;a2 b2 c2 d2 e2 f2 g2 h2&quot;;</span>
+<span class="fc" id="L297">        String black = &quot;a7 b7 c7 d7 e7 f7 g7 h7&quot;;</span>
+<span class="fc" id="L298">        String expectedOccupant = &quot;a2&quot;;</span>
+<span class="fc" id="L299">        String actualOccupant = Main.getOccupant(square, white, black);</span>
+<span class="fc" id="L300">        assertEquals(expectedOccupant, actualOccupant);</span>
+<span class="fc" id="L301">    }</span>
+
+
+    // These test cases ensure that the function returns the correct color based on the input piece.
+    // The first two test cases check that the function correctly identifies uppercase and lowercase pieces.
+    // The next two test cases check that the function works for other pieces.
+    @Test
+    public void testGetColor() {
+<span class="fc" id="L309">        assertEquals('W', Main.getColor(&quot;K&quot;));</span>
+<span class="fc" id="L310">        assertEquals('B', Main.getColor(&quot;p&quot;));</span>
+<span class="fc" id="L311">        assertEquals('W', Main.getColor(&quot;R&quot;));</span>
+<span class="fc" id="L312">        assertEquals('B', Main.getColor(&quot;n&quot;));</span>
+<span class="fc" id="L313">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
